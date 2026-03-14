@@ -265,7 +265,7 @@
       border-radius: 50%;
       display: inline-block;
       background:
-        conic-gradient(from 0deg, #9ca3af calc(var(--p) * 1%), #e2e8f0 0);
+        conic-gradient(from 0deg, #ef4444 calc(var(--p) * 1%), #e2e8f0 0);
       box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.06);
     }
     .progress-circle.lg {
@@ -273,10 +273,7 @@
     }
 
 
-    .card-name.achieved {
-      color: #2563eb;
-      font-weight: 800;
-    }
+    .card-name.achieved { font-weight: 400; }
     .progress-ring {
       width: 15px;
       height: 15px;
@@ -585,7 +582,7 @@
     function renderProgressCircle(percent, large = false) {
       const sizeClass = large ? ' lg' : '';
 
-      let color = '#9ca3af';
+      let color = '#ef4444';
       if (percent >= 100) {
         color = '#2563eb';
       } else if (percent >= 70) {
@@ -750,11 +747,19 @@
         const achieved = (card.targetAmount || 0) > 0 && total >= card.targetAmount;
         const rate = getRatePercent(total, card.targetAmount);
 
-        const statusSymbol = achieved ? '<span class="check-done">☑</span>' : '<span class="check-empty">☐</span>';
+        let nameColor = '#ef4444';
+        if (rate >= 100) {
+          nameColor = '#2563eb';
+        } else if (rate >= 70) {
+          nameColor = '#16a34a';
+        } else if (rate >= 30) {
+          nameColor = '#f97316';
+        }
+
         const tr = document.createElement('tr');
         if (card.id === state.detailCardId) tr.classList.add('selected');
         tr.innerHTML = `
-          <td class="card-name ${achieved ? 'achieved' : ''}" style="width:92px;max-width:92px;overflow:hidden;white-space:nowrap;">${escapeHtml(card.name)}</td>
+          <td class="card-name" style="width:92px;max-width:92px;overflow:hidden;white-space:nowrap;color:${nameColor};font-weight:400;">${escapeHtml(card.name)}</td>
           <td class="right">${toMan(card.baseAmount)}</td>
           <td class="right">${toMan(card.spendAmount)}</td>
           <td class="right"><strong>${toMan(total)}</strong></td>
