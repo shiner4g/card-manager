@@ -759,7 +759,7 @@
         const tr = document.createElement('tr');
         if (card.id === state.detailCardId) tr.classList.add('selected');
         tr.innerHTML = `
-          <td class="card-name" style="width:92px;max-width:92px;overflow:hidden;white-space:nowrap;color:${nameColor};font-weight:400;">${escapeHtml(card.name)}</td>
+          <td class="card-name" style="width:92px;max-width:92px;overflow:hidden;white-space:nowrap;color:${nameColor};font-weight:700;">${escapeHtml(card.name)}</td>
           <td class="right">${toMan(card.baseAmount)}</td>
           <td class="right">${toMan(card.spendAmount)}</td>
           <td class="right"><strong>${toMan(total)}</strong></td>
